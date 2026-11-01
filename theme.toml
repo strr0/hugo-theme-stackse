@@ -1,0 +1,9 @@
+name = "StackSE"
+license = "GPL-3.0"
+licenselink = "https://github.com/strr0/hugo-theme-stackse/blob/main/LICENSE"
+description = "Stack 主题"
+homepage = "https://github.com/strr0/hugo-theme-stackse"
+min_version = "0.157.0"
+
+[author]
+  name = "strr0"

@@ -1,0 +1,33 @@
+{{ define "body-class" }}template-search{{ end }}
+{{ define "head" }}
+    {{- with .OutputFormats.Get "json" -}} 
+        <link rel="preload" href="{{ .RelPermalink }}" as="fetch" crossorigin="anonymous">
+    {{- end -}}
+{{ end }}
+{{ define "main" }}
+<form action="{{ .RelPermalink }}" class="search-form"{{ with .OutputFormats.Get "json" -}} data-json="{{ .RelPermalink }}"{{- end }}>
+    <p>
+        <label>{{ T "search.title" }}</label>
+        <input name="keyword" placeholder="{{ T `search.placeholder` }}" />
+    </p>
+
+    <button title="{{ T `search.title` }}">
+        {{ partial "helper/icon" "search" }}
+    </button>
+</form>
+
+<div class="search-result hidden">
+    <h3 class="search-result--title section-title"></h3>
+    <div class="search-result--list article-list--compact"></div>
+</div>
+
+<script>
+    window.searchResultTitleTemplate = "{{ T `search.resultTitle` }}"
+</script>
+
+{{- $searchScript := resources.Get "js/search.js" -}}
+{{- if hugo.IsProduction -}}{{- $searchScript = $searchScript | minify -}}{{- end -}}
+<script type="module" src="{{ $searchScript.RelPermalink }}"></script>
+
+{{ partialCached "footer/footer" . }}
+{{ end }}

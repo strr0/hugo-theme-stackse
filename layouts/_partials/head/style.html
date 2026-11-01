@@ -1,0 +1,3 @@
+{{/* 样式源文件就是 assets/css/style.css（可读格式，SCSS 已移除）；改样式直接编辑此文件，构建时由 Hugo 内置 minify 压缩，不依赖任何 Sass 工具链 */}}
+{{ $style := resources.Get "css/style.css" | minify | resources.Fingerprint "sha256" }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}">

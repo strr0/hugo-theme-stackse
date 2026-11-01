@@ -1,0 +1,21 @@
+{{- $params := dict
+    "codeblock" (dict
+        "copy" (i18n "article.codeblock.copy")
+        "copied" (i18n "article.codeblock.copied")
+    )
+-}}
+<script>window.stackParams = {{ $params | jsonify | safeJS }};</script>
+
+{{- $script := resources.Get "js/main.js" -}}
+{{- if hugo.IsProduction -}}{{- $script = $script | minify -}}{{- end -}}
+{{- $script = $script | fingerprint -}}
+
+<script type="module" src="{{ $script.RelPermalink }}"></script>
+
+{{- with resources.Get "js/custom.js" -}}
+    {{/* Place your custom script in HUGO_SITE_FOLDER/assets/js/custom.js */}}
+    {{- $customScript := . -}}
+    {{- if hugo.IsProduction -}}{{- $customScript = $customScript | minify -}}{{- end -}}
+    {{- $customScript = $customScript | fingerprint -}}
+    <script type="module" src="{{ $customScript.RelPermalink }}"></script>
+{{- end -}}

@@ -1,0 +1,10 @@
+{{/*
+    ES Module 依赖图输出：main.js / search.js 在浏览器中通过相对路径 import 同目录模块，
+    这些共享模块（menu、colorScheme、scrollspy 等）不经过任何模板管线，必须在此显式落盘，
+    否则 public/js 下只有入口文件，运行时 import 会 404。
+    入口 minify 后 import 路径仍指向同目录的未压缩 .js（Hugo 内置 minifier 不改写模块说明符）。
+*/}}
+{{- range resources.Match "js/*.js" -}}
+    {{- $u := .RelPermalink -}}
+<!--jsmod {{$u}}-->
+{{- end -}}
