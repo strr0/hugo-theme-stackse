@@ -1,5 +1,6 @@
 toggleMenu = "Toggle Menu"
 darkMode   = "Dark Mode"
+hideAnswer = "Hide Answers"
 
 [list]
     section = "Section"
@@ -17,6 +18,9 @@ darkMode   = "Dark Mode"
     tableOfContents = "Table of contents"
     relatedContent  = "Related content"
     lastUpdatedOn   = "Last updated on"
+    clickToShow     = "Click to show answer"
+    clickToHide     = "Collapse answer"
+    answerHidden    = "Answer hidden"
 
     [article.readingTime]
         one   = "{{ .Count }} minute read"

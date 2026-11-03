@@ -89,6 +89,14 @@
                         <span>{{ T "darkMode" }}</span>
                     </li>
                 {{ end }}
+
+                {{ if .Site.Params.article.answerToggle }}
+                    <li id="answer-toggle">
+                        {{ partial "helper/icon" "toggle-left" }}
+                        {{ partial "helper/icon" "toggle-right" }}
+                        <span>{{ T "hideAnswer" }}</span>
+                    </li>
+                {{ end }}
             </ol>
         </li>
     </ol>

@@ -1,5 +1,17 @@
-<section class="article-content">
+{{- $protect := false -}}
+{{- if and .Site.Params.article.answerToggle (in (.Site.Params.mainSections | default (slice "posts")) .Section) -}}
+    {{- $protect = true -}}
+{{- end -}}
+<section class="article-content{{ if $protect }} answer-protected{{ end }}">
+    {{- if $protect -}}
+    <button type="button" class="answer-collapse-btn">{{ T "article.clickToHide" }}</button>
+    {{- end -}}
     <!-- Refer to https://discourse.gohugo.io/t/responsive-tables-in-markdown/10639/5 -->
     {{ $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" }}
     {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+    {{- if $protect -}}
+    <div class="answer-mask">
+        <button type="button" class="answer-mask-btn">{{ T "article.clickToShow" }}</button>
+    </div>
+    {{- end -}}
 </section>

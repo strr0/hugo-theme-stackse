@@ -1,0 +1,12 @@
+{{- if .Site.Params.article.answerToggle -}}
+    {{- $default := .Site.Params.article.answerDefault | default "shown" -}}
+    <script>
+        (function() {
+            const key = 'StackShowAnswer';
+            if (!localStorage.getItem(key)) {
+                localStorage.setItem(key, "{{ $default }}");
+            }
+            document.documentElement.dataset.showAnswer = localStorage.getItem(key);
+        })();
+    </script>
+{{- end -}}

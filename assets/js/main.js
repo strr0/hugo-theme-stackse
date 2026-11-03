@@ -12,6 +12,7 @@ import { setupScrollspy } from './scrollspy.js';
 import { setupSmoothAnchors } from './smoothAnchors.js';
 import { setupPaginationJump } from './pagination.js';
 import { setupCodeCopy } from './code-copy.js';
+import { setupAnswerToggle } from './answerToggle.js';
 
 let Stack = {
     init: () => {
@@ -28,6 +29,8 @@ let Stack = {
         }
 
         setupPaginationJump();
+
+        setupAnswerToggle();
 
         new StackColorScheme(document.getElementById('dark-mode-toggle'));
     }

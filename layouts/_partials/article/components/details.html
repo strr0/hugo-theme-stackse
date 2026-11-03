@@ -1,8 +1,13 @@
 {{- $IsList := .IsList -}}
 {{- $Page := .Page -}}
+{{- $showBadge := and $IsList $Page.Site.Params.article.answerToggle (in ($Page.Site.Params.mainSections | default (slice "posts")) $Page.Section) -}}
 <div class="article-details">
-    {{ if $Page.Params.categories }}
+    {{ if or $Page.Params.categories $showBadge }}
     <header class="article-category">
+        {{ if $showBadge }}
+        <span class="article-badge answer-hidden-badge">{{ T "article.answerHidden" }}</span>
+        {{ end }}
+        {{ if $Page.Params.categories }}
         {{ range ($Page.GetTerms "categories") }}
             {{ $color := partial "helper/color-from-str" .LinkTitle }}
             {{ $BackgroundColor := default $color.BackgroundColor .Params.style.background }}
@@ -10,6 +15,7 @@
             <a href="{{ .RelPermalink }}" style="background-color: {{ $BackgroundColor | safeCSS }}; color: {{ $TextColor | safeCSS }};">
                 {{ .LinkTitle }}
             </a>
+        {{ end }}
         {{ end }}
     </header>
     {{ end }}
